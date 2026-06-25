@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matveev-group.ru/sitemap.xml

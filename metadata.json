@@ -1,0 +1,6 @@
+{
+  "name": "Matveev Holding",
+  "description": "An elegant, Apple-inspired minimalist showcase of the startups, technology products, and innovative ecosystem of Matveev Holding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
