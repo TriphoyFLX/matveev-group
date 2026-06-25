@@ -371,22 +371,17 @@ export default function App() {
       {/* Hero Banner Section */}
       <header id="hero-banner" className="relative w-full overflow-hidden bg-mv-page pt-20 pb-16 md:py-32 flex flex-col items-center">
         <div className="max-w-5xl mx-auto px-6 text-center space-y-6">
-          <div className="flex justify-center mb-4">
-            <div className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-mv-card-muted border border-mv-border shadow-lg">
-              <MatveevLogo className="h-10 md:h-12 w-auto" />
+          <div className="flex items-center justify-center gap-4 md:gap-6">
+            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-2xl bg-mv-card-muted border border-mv-border shadow-lg shrink-0">
+              <MatveevLogo className="h-7 sm:h-8 md:h-10 lg:h-12 w-auto" />
             </div>
+            <h1 className="text-left text-5xl md:text-7xl lg:text-8xl font-extrabold text-apple-gray-900 tracking-tight leading-none">
+              Matveev <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-500 via-neutral-300 to-apple-gray-900 font-extrabold">
+                Group.
+              </span>
+            </h1>
           </div>
-
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-apple-gray-50 border border-apple-gray-100 text-xs font-medium text-apple-gray-400">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-300" /> Дмитрий Матвеев · Омск · Matveev Group
-          </span>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-apple-gray-900 tracking-tight leading-none">
-            Matveev <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-500 via-neutral-300 to-apple-gray-900 font-extrabold">
-              Group.
-            </span>
-          </h1>
 
           <p className="text-sm md:text-base font-semibold text-apple-gray-400 tracking-wide">
             Матвеев Дмитрий — основатель · Омск, Россия
