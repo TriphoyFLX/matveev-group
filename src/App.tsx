@@ -13,7 +13,8 @@ import {
   Zap, 
   TrendingUp, 
   Shield, 
-  Sun, 
+  Sun,
+  Moon,
   ChevronRight, 
   Info, 
   Lock, 
@@ -54,8 +55,11 @@ import { STARTUPS, PRODUCTS, CORPMILESTONES, COREPILLARS, CONTACT } from './data
 import { Startup, Product, Milestone, Pillar, FeedbackSubmission } from './types';
 import DeviceSimulator from './components/DeviceSimulator';
 import VentureCalculator from './components/VentureCalculator';
+import MatveevLogo from './components/MatveevLogo';
+import { useTheme } from './theme';
 
 export default function App() {
+  const { theme, toggleTheme } = useTheme();
   const [selectedStartup, setSelectedStartup] = useState<Startup>(STARTUPS[0]);
   const [activeProductTab, setActiveProductTab] = useState<string>('');
   const [activePillarTab, setActivePillarTab] = useState<string>(COREPILLARS[0].id);
@@ -111,7 +115,7 @@ export default function App() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    ctx.strokeStyle = '#1d1d1f';
+    ctx.strokeStyle = theme === 'light' ? '#1d1d1f' : '#f5f5f7';
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
@@ -285,20 +289,14 @@ export default function App() {
   });
 
   return (
-    <div id="matveev-root-layout" className="min-h-screen bg-white text-apple-gray-900 selection:bg-apple-blue selection:text-white">
+    <div id="matveev-root-layout" className="min-h-screen bg-mv-page text-apple-gray-900 selection:bg-apple-blue selection:text-white transition-colors duration-300">
       
       {/* Translucent Global iOS Navigation Bar */}
-      <nav id="top-nav-bar" className="sticky top-0 w-full z-50 bg-white/75 backdrop-blur-md border-b border-apple-gray-100">
+      <nav id="top-nav-bar" className="sticky top-0 w-full z-50 bg-mv-page/85 backdrop-blur-md border-b border-apple-gray-100">
         <div className="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
           <a href="#hero-banner" className="flex items-center gap-2.5">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-apple-gray-950 shrink-0">
-              <img
-                src="/matveevGroupLogo.svg"
-                alt="Matveev Group — логотип"
-                className="h-4 w-auto"
-                width={24}
-                height={16}
-              />
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-mv-card-muted border border-mv-border shrink-0">
+              <MatveevLogo className="h-4 w-auto" />
             </span>
             <span className="text-sm font-extrabold tracking-[0.12em] text-apple-gray-900 font-sans uppercase hidden sm:inline">
               Matveev Group
@@ -315,10 +313,18 @@ export default function App() {
             <a href="#synergy-calculator" className="hover:text-apple-gray-900 transition-colors">Портфель</a>
           </div>
 
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="p-2 rounded-full border border-apple-gray-100 bg-mv-card-muted text-apple-gray-300 hover:text-apple-gray-900 transition-colors"
+              aria-label={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <a 
               href="#incorporation-portal"
-              className="px-3.5 py-1 text-xs font-semibold bg-apple-gray-950 text-white rounded-full hover:bg-apple-gray-900 transition-colors shadow-sm"
+              className="px-3.5 py-1 text-xs font-semibold mv-btn-primary rounded-full transition-colors shadow-sm"
             >
               Сотрудничество
             </a>
@@ -340,7 +346,7 @@ export default function App() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-t border-apple-gray-100 bg-white px-6 py-4 flex flex-col gap-4 text-xs font-medium text-apple-gray-400"
+              className="md:hidden border-t border-apple-gray-100 bg-mv-card px-6 py-4 flex flex-col gap-4 text-xs font-medium text-apple-gray-400"
             >
               <a onClick={() => setIsMobileMenuOpen(false)} href="#portfolio-bento" className="hover:text-apple-gray-900 py-1 border-b border-apple-gray-50">Проекты</a>
               <a onClick={() => setIsMobileMenuOpen(false)} href="#offerings-specs" className="hover:text-apple-gray-900 py-1 border-b border-apple-gray-50">Продукты</a>
@@ -348,24 +354,26 @@ export default function App() {
               <a onClick={() => setIsMobileMenuOpen(false)} href="#corporate-pillars" className="hover:text-apple-gray-900 py-1 border-b border-apple-gray-50">О группе</a>
               <a onClick={() => setIsMobileMenuOpen(false)} href="#newsroom-chronology" className="hover:text-apple-gray-900 py-1 border-b border-apple-gray-50">Хронология</a>
               <a onClick={() => setIsMobileMenuOpen(false)} href="#synergy-calculator" className="hover:text-apple-gray-900 py-1 border-b border-apple-gray-50 font-semibold text-apple-blue">Портфель</a>
-              <a onClick={() => setIsMobileMenuOpen(false)} href="#incorporation-portal" className="text-center bg-apple-gray-950 py-2.5 text-white rounded-xl">Сотрудничество</a>
+              <button
+                type="button"
+                onClick={() => { toggleTheme(); }}
+                className="flex items-center justify-center gap-2 py-2 border-b border-apple-gray-50 text-apple-gray-400 hover:text-apple-gray-900"
+              >
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+              </button>
+              <a onClick={() => setIsMobileMenuOpen(false)} href="#incorporation-portal" className="text-center mv-btn-primary py-2.5 rounded-xl">Сотрудничество</a>
             </motion.div>
           )}
         </AnimatePresence>
       </nav>
 
       {/* Hero Banner Section */}
-      <header id="hero-banner" className="relative w-full overflow-hidden bg-white pt-20 pb-16 md:py-32 flex flex-col items-center">
+      <header id="hero-banner" className="relative w-full overflow-hidden bg-mv-page pt-20 pb-16 md:py-32 flex flex-col items-center">
         <div className="max-w-5xl mx-auto px-6 text-center space-y-6">
           <div className="flex justify-center mb-4">
-            <div className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-apple-gray-950 shadow-lg">
-              <img
-                src="/matveevGroupLogo.svg"
-                alt="Matveev Group"
-                className="h-10 md:h-12 w-auto"
-                width={80}
-                height={55}
-              />
+            <div className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-mv-card-muted border border-mv-border shadow-lg">
+              <MatveevLogo className="h-10 md:h-12 w-auto" />
             </div>
           </div>
 
@@ -375,7 +383,7 @@ export default function App() {
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-apple-gray-900 tracking-tight leading-none">
             Matveev <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-400 via-neutral-600 to-black font-extrabold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-500 via-neutral-300 to-apple-gray-900 font-extrabold">
               Group.
             </span>
           </h1>
@@ -395,7 +403,7 @@ export default function App() {
           <div className="pt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
             <a 
               href="#portfolio-bento"
-              className="px-6 py-3 rounded-full bg-apple-gray-950 text-white font-semibold text-xs hover:bg-neutral-800 transition-colors flex items-center gap-1 shadow-sm"
+              className="px-6 py-3 rounded-full mv-btn-primary font-semibold text-xs transition-colors flex items-center gap-1 shadow-sm"
             >
               Портфель проектов <ArrowRight className="w-4 h-4" />
             </a>
@@ -424,39 +432,40 @@ export default function App() {
 
             {/* Custom SVG visualization representing core network flow */}
             <div className="flex-1 w-full my-6 flex items-center justify-center">
-              <svg className="w-full h-full max-h-[140px]" viewBox="0 0 800 150" fill="none">
+              <svg className="w-full h-full max-h-[140px] text-apple-gray-900" viewBox="0 0 800 150" fill="none">
                 <path d="M 50 120 C 150 120, 100 30, 200 30 C 300 30, 250 100, 350 100 C 450 100, 400 50, 500 50 C 600 50, 550 130, 650 130 C 750 130, 700 80, 750 80" stroke="#0071e3" strokeWidth="2.5" strokeDasharray="5,5" />
                 <path d="M 50 120 C 150 120, 100 30, 200 30 C 300 30, 250 100, 350 100 C 450 100, 400 50, 500 50 C 600 50, 550 130, 650 130" stroke="#30d158" strokeWidth="1.5" />
                 
                 {/* Node Circles represent startup links */}
-                <circle cx="50" cy="120" r="6" fill="#1d1d1f" />
-                <text x="18" y="124" fontSize="9" fill="#1d1d1f" fontWeight="bold">Matveev</text>
-                <circle cx="200" cy="30" r="7" fill="#bf5af2" stroke="#ffffff" strokeWidth="2" />
-                <text x="212" y="34" fontSize="10" fill="#1d1d1f" fontWeight="bold">Loopera</text>
+                <circle cx="50" cy="120" r="6" fill="currentColor" className="text-apple-gray-900" />
+                <text x="18" y="124" fontSize="9" fill="currentColor" className="text-apple-gray-900" fontWeight="bold">Matveev</text>
 
-                <circle cx="350" cy="100" r="7" fill="#0071e3" stroke="#ffffff" strokeWidth="2" />
-                <text x="362" y="104" fontSize="10" fill="#1d1d1f" fontWeight="bold">Decksy</text>
+                <circle cx="200" cy="30" r="7" fill="#bf5af2" stroke="var(--mv-page)" strokeWidth="2" />
+                <text x="212" y="34" fontSize="10" fill="currentColor" fontWeight="bold">Loopera</text>
 
-                <circle cx="500" cy="50" r="7" fill="#ff9f0a" stroke="#ffffff" strokeWidth="2" />
-                <text x="512" y="54" fontSize="10" fill="#1d1d1f" fontWeight="bold">Triphoy</text>
+                <circle cx="350" cy="100" r="7" fill="#0071e3" stroke="var(--mv-page)" strokeWidth="2" />
+                <text x="362" y="104" fontSize="10" fill="currentColor" fontWeight="bold">Decksy</text>
 
-                <circle cx="650" cy="130" r="7" fill="#30d158" stroke="#ffffff" strokeWidth="2" />
-                <text x="662" y="134" fontSize="10" fill="#1d1d1f" fontWeight="bold">Омск</text>
+                <circle cx="500" cy="50" r="7" fill="#ff9f0a" stroke="var(--mv-page)" strokeWidth="2" />
+                <text x="512" y="54" fontSize="10" fill="currentColor" fontWeight="bold">Triphoy</text>
+
+                <circle cx="650" cy="130" r="7" fill="#30d158" stroke="var(--mv-page)" strokeWidth="2" />
+                <text x="662" y="134" fontSize="10" fill="currentColor" fontWeight="bold">Омск</text>
               </svg>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs pt-4 border-t border-apple-gray-100">
               <div className="flex flex-col">
                 <span className="text-apple-gray-300">Loopera — лупов</span>
-                <span className="font-extrabold text-[#1d1d1f]">200+</span>
+                <span className="font-extrabold text-apple-gray-900">200+</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-apple-gray-300">Triphoy — релизов</span>
-                <span className="font-extrabold text-[#1d1d1f]">~10 треков</span>
+                <span className="font-extrabold text-apple-gray-900">~10 треков</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-apple-gray-300">Штаб-квартира</span>
-                <span className="font-extrabold text-[#1d1d1f]">Омск, Россия</span>
+                <span className="font-extrabold text-apple-gray-900">Омск, Россия</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-apple-gray-300">Руководитель</span>
@@ -492,7 +501,7 @@ export default function App() {
                 <button
                   key={startup.id}
                   onClick={() => setSelectedStartup(startup)}
-                  className={`py-4 px-5 rounded-2xl text-left border transition-all flex flex-col justify-between aspect-[4/3] ${worksAsActive ? 'bg-white shadow-xl border-apple-gray-200/50 scale-[1.03]' : 'bg-white/40 hover:bg-white border-apple-gray-100'}`}
+                  className={`py-4 px-5 rounded-2xl text-left border transition-all flex flex-col justify-between aspect-[4/3] ${worksAsActive ? 'bg-mv-card shadow-xl border-apple-gray-200/50 scale-[1.03]' : 'bg-mv-card/40 hover:bg-mv-card border-apple-gray-100'}`}
                 >
                   <div className="p-2.5 rounded-xl bg-apple-gray-50 border border-apple-gray-100 inline-flex" style={{ color: startup.color }}>
                     {renderLogoIcon(startup.icon)}
@@ -514,7 +523,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="bg-white border border-apple-gray-200/70 rounded-3xl p-6 md:p-10 shadow-xl"
+              className="bg-mv-card border border-apple-gray-200/70 rounded-3xl p-6 md:p-10 shadow-xl"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                 {/* Left column info */}
@@ -549,7 +558,7 @@ export default function App() {
                   )}
 
                   <div className="bg-apple-gray-50/70 border border-apple-gray-100 rounded-2xl p-6 space-y-3.5">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-[#1d1d1f] font-mono">
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-apple-gray-900 font-mono">
                       Ключевые достижения
                     </h4>
                     <ul className="space-y-2">
@@ -566,7 +575,7 @@ export default function App() {
                 {/* Right Column Metrics Panel */}
                 <div className="lg:col-span-5 flex flex-col justify-between bg-apple-gray-50 border border-apple-gray-100 rounded-2.5xl p-6 md:p-8">
                   <div className="space-y-6">
-                    <h4 className="text-xs font-extrabold uppercase tracking-wide text-[#1d1d1f] font-mono pb-2 border-b border-apple-gray-200">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wide text-apple-gray-900 font-mono pb-2 border-b border-apple-gray-200">
                       Метрики проекта
                     </h4>
 
@@ -654,12 +663,12 @@ export default function App() {
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                               {currentProd.features.map((feat, fIdx) => (
-                                <div key={fIdx} className="bg-white p-4 rounded-2xl border border-apple-gray-100 shadow-sm flex flex-col justify-between aspect-square">
+                                <div key={fIdx} className="bg-mv-card p-4 rounded-2xl border border-apple-gray-100 shadow-sm flex flex-col justify-between aspect-square">
                                   <div className="p-2 rounded-lg bg-apple-gray-50 border border-apple-gray-100 w-fit text-apple-blue">
                                     {renderLogoIcon(feat.icon, "w-4 h-4")}
                                   </div>
                                   <div>
-                                    <h6 className="text-xs font-extrabold text-[#1d1d1f] mb-1">{feat.title}</h6>
+                                    <h6 className="text-xs font-extrabold text-apple-gray-900 mb-1">{feat.title}</h6>
                                     <p className="text-[10px] text-apple-gray-300 leading-snug">{feat.desc}</p>
                                   </div>
                                 </div>
@@ -668,7 +677,7 @@ export default function App() {
                           </div>
 
                           {/* Right side Detailed Spec sheet (Apple iPad hardware list style) */}
-                          <div className="lg:col-span-5 bg-white border border-apple-gray-100 rounded-2xl p-6">
+                          <div className="lg:col-span-5 bg-mv-card border border-apple-gray-100 rounded-2xl p-6">
                             <h6 className="text-[10px] font-mono text-apple-gray-300 uppercase tracking-widest pb-3 border-b border-apple-gray-100 block mb-4">
                               Характеристики
                             </h6>
@@ -695,7 +704,7 @@ export default function App() {
       </section>
 
       {/* Interactive Core Device Workspace (Mocking Holo / Aether / Velo App links) */}
-      <section id="device-studio" className="py-24 bg-white">
+      <section id="device-studio" className="py-24 bg-mv-page">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
             <span className="text-[11px] font-extrabold font-mono tracking-wider text-apple-blue uppercase block">
@@ -734,7 +743,7 @@ export default function App() {
                   <button
                     key={pillar.id}
                     onClick={() => setActivePillarTab(pillar.id)}
-                    className={`text-left p-5 rounded-2xl border transition-all flex items-center justify-between ${isActive ? 'bg-white shadow-lg border-apple-gray-200/60 scale-[1.02]' : 'bg-white/40 border-apple-gray-100/50 hover:bg-white'}`}
+                    className={`text-left p-5 rounded-2xl border transition-all flex items-center justify-between ${isActive ? 'bg-mv-card shadow-lg border-apple-gray-200/60 scale-[1.02]' : 'bg-mv-card/40 border-apple-gray-100/50 hover:bg-mv-card'}`}
                   >
                     <div>
                       <p className="text-[10px] uppercase tracking-wider font-mono text-apple-gray-300 mb-1">Принцип</p>
@@ -759,7 +768,7 @@ export default function App() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3, ease: 'easeOut' }}
-                      className="h-full bg-white border border-apple-gray-100 rounded-3xl p-8 md:p-12 flex flex-col justify-between shadow-md"
+                      className="h-full bg-mv-card border border-apple-gray-100 rounded-3xl p-8 md:p-12 flex flex-col justify-between shadow-md"
                     >
                       <div className="space-y-8">
                         {/* Quote section */}
@@ -774,7 +783,7 @@ export default function App() {
 
                         {/* Description paragraphs */}
                         <div className="space-y-4">
-                          <h4 className="text-lg font-bold text-[#1d1d1f]">{targetPillar.title}</h4>
+                          <h4 className="text-lg font-bold text-apple-gray-900">{targetPillar.title}</h4>
                           <p className="text-xs text-apple-gray-300 leading-relaxed">
                             {targetPillar.description}
                           </p>
@@ -806,7 +815,7 @@ export default function App() {
       </section>
 
       {/* Press announcements / Milestones Timeline Hub */}
-      <section id="newsroom-chronology" className="py-24 bg-white border-t border-apple-gray-100">
+      <section id="newsroom-chronology" className="py-24 bg-mv-page border-t border-apple-gray-100">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center space-y-2 mb-12">
             <span className="text-[11px] font-extrabold font-mono tracking-wider text-apple-blue uppercase block">
@@ -853,7 +862,7 @@ export default function App() {
                   <div className="w-full md:w-1/2 pl-10 md:pl-0 md:px-8">
                     <div className="bg-apple-gray-50 border border-apple-gray-100 p-5 rounded-2xl hover:shadow-md transition-shadow">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono font-bold uppercase text-apple-blue bg-white px-2 py-0.5 rounded-md border border-apple-gray-100">
+                        <span className="text-[10px] font-mono font-bold uppercase text-apple-blue bg-mv-card px-2 py-0.5 rounded-md border border-apple-gray-100">
                           {categoryLabel(m.category)}
                         </span>
                         <span className="text-[10px] font-mono text-apple-gray-300">{m.date} ({m.quarter})</span>
@@ -891,7 +900,7 @@ export default function App() {
       </section>
 
       {/* Digital Inquiries Portal / Digital Form with hand signature canvas */}
-      <section id="incorporation-portal" className="py-24 bg-white border-t border-apple-gray-200">
+      <section id="incorporation-portal" className="py-24 bg-mv-page border-t border-apple-gray-200">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
             <span className="text-[11px] font-extrabold font-mono tracking-wider text-apple-blue uppercase block">
@@ -929,7 +938,7 @@ export default function App() {
                     value={formName} 
                     onChange={(e) => setFormName(e.target.value)}
                     placeholder="Дмитрий Матвеев"
-                    className="w-full bg-white border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
+                    className="w-full bg-mv-card border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
                   />
                 </div>
 
@@ -943,7 +952,7 @@ export default function App() {
                     value={formEmail} 
                     onChange={(e) => setFormEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full bg-white border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
+                    className="w-full bg-mv-card border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
                   />
                 </div>
               </div>
@@ -959,7 +968,7 @@ export default function App() {
                     value={formCompany} 
                     onChange={(e) => setFormCompany(e.target.value)}
                     placeholder="Название компании"
-                    className="w-full bg-white border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
+                    className="w-full bg-mv-card border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
                   />
                 </div>
 
@@ -970,7 +979,7 @@ export default function App() {
                   <select 
                     value={formType} 
                     onChange={(e) => setFormType(e.target.value as any)}
-                    className="w-full bg-white border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
+                    className="w-full bg-mv-card border border-apple-gray-200 rounded-xl px-4 py-3 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none"
                   >
                     <option value="Partnership">Партнёрство / коллаборация</option>
                     <option value="Investment">Инвестиционное предложение</option>
@@ -994,7 +1003,7 @@ export default function App() {
                       type="button"
                       key={tierOption.id}
                       onClick={() => setFormTier(tierOption.id)}
-                      className={`text-left p-3 rounded-xl border text-[11px] transition-all flex flex-col justify-between aspect-[12/4] ${formTier === tierOption.id ? 'bg-apple-gray-950 text-white border-apple-gray-950 font-semibold' : 'bg-white border-apple-gray-100 hover:bg-neutral-50 text-apple-gray-300'}`}
+                      className={`text-left p-3 rounded-xl border text-[11px] transition-all flex flex-col justify-between aspect-[12/4] ${formTier === tierOption.id ? 'mv-btn-primary border-mv-border font-semibold' : 'bg-mv-card border-apple-gray-100 hover:bg-mv-card-muted text-apple-gray-300'}`}
                     >
                       <span>{tierOption.label}</span>
                       <span className="text-[9px] font-mono opacity-80 uppercase block mt-1">{tierOption.sub}</span>
@@ -1012,7 +1021,7 @@ export default function App() {
                   onChange={(e) => setFormMessage(e.target.value)}
                   rows={4}
                   placeholder="Опишите предложение о сотрудничестве..."
-                  className="w-full bg-white border border-apple-gray-200 rounded-xl p-4 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none resize-none"
+                  className="w-full bg-mv-card border border-apple-gray-200 rounded-xl p-4 text-xs focus:ring-1 focus:ring-apple-blue focus:outline-none resize-none"
                 />
               </div>
 
@@ -1030,7 +1039,7 @@ export default function App() {
                     <Trash2 className="w-3 h-3" /> Очистить
                   </button>
                 </div>
-                <div className="relative bg-white border border-apple-gray-200 rounded-2xl overflow-hidden aspect-[12/3] cursor-pointer">
+                <div className="relative bg-mv-card border border-apple-gray-200 rounded-2xl overflow-hidden aspect-[12/3] cursor-pointer">
                   
                   {/* Canvas block */}
                   <canvas
@@ -1044,7 +1053,7 @@ export default function App() {
                     onTouchStart={startDrawing}
                     onTouchMove={draw}
                     onTouchEnd={stopDrawing}
-                    className="absolute inset-0 w-full h-full bg-white"
+                    className="absolute inset-0 w-full h-full bg-mv-card"
                   />
                   
                   {!hasSigned && (
@@ -1066,7 +1075,7 @@ export default function App() {
                   id="agree-checkbox" 
                   checked={agreedToTerms}
                   onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  className="w-4 h-4 text-apple-blue bg-white border-apple-gray-200 rounded cursor-pointer accent-apple-blue"
+                  className="w-4 h-4 text-apple-blue bg-mv-card border-apple-gray-200 rounded cursor-pointer accent-apple-blue"
                 />
                 <label htmlFor="agree-checkbox" className="text-[11px] text-apple-gray-300 cursor-pointer select-none">
                   Даю согласие на обработку персональных данных для рассмотрения обращения. *
@@ -1082,7 +1091,7 @@ export default function App() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-3 rounded-full bg-apple-gray-950 hover:bg-neutral-800 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2.5 shadow-sm"
+                  className="w-full sm:w-auto px-8 py-3 rounded-full mv-btn-primary hover:opacity-90 font-semibold text-xs transition-colors flex items-center justify-center gap-2.5 shadow-sm"
                 >
                   {isSubmitting ? (
                     <>
@@ -1129,7 +1138,7 @@ export default function App() {
                     <div className="space-y-4">
                       <div className="flex justify-between items-start">
                         <div>
-                          <span className="text-[9px] font-mono text-apple-blue bg-white border border-apple-gray-100 px-2 py-0.5 rounded uppercase font-bold">
+                          <span className="text-[9px] font-mono text-apple-blue bg-mv-card border border-apple-gray-100 px-2 py-0.5 rounded uppercase font-bold">
                             {interestLabel(sub.interestType)}
                           </span>
                           <span className="text-[10px] text-apple-gray-300 block mt-1 font-mono">{sub.id}</span>
@@ -1143,7 +1152,7 @@ export default function App() {
                         <p><strong className="text-apple-gray-900">Формат:</strong> {sub.investmentTier}</p>
                       </div>
 
-                      <div className="bg-white/70 p-3 rounded-lg border border-apple-gray-100/50 text-[11px] text-apple-gray-300">
+                      <div className="bg-mv-card/70 p-3 rounded-lg border border-apple-gray-100/50 text-[11px] text-apple-gray-300">
                         <span className="font-bold text-apple-gray-400 block mb-0.5">Сообщение:</span>
                         "{sub.message}"
                       </div>

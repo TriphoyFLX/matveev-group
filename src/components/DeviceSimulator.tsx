@@ -72,7 +72,7 @@ export default function DeviceSimulator() {
   };
 
   return (
-    <div id="device-simulator-component" className="w-full max-w-4xl mx-auto rounded-3xl bg-apple-gray-50 border border-apple-gray-100 p-6 shadow-2xl overflow-hidden">
+    <div id="device-simulator-component" className="w-full max-w-4xl mx-auto rounded-3xl bg-mv-card-muted border border-mv-border p-6 shadow-2xl overflow-hidden">
       <div className="flex flex-col md:flex-row gap-8 items-center">
         <div id="ios-hardware-bezel" className="relative w-full max-w-[340px] aspect-[9/18.5] bg-neutral-900 rounded-[50px] p-3.5 shadow-2xl border-4 border-neutral-800 ring-1 ring-neutral-700/50">
           <div className="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-3xl z-40 flex items-center justify-between px-3">
@@ -86,8 +86,8 @@ export default function DeviceSimulator() {
             <div className="w-3 h-3 rounded-full bg-blue-900 border-2 border-stone-800"></div>
           </div>
 
-          <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-white flex flex-col justify-between select-none">
-            <div className="px-6 pt-7 pb-2 flex justify-between items-center text-xs font-semibold text-apple-gray-900/90 z-30 bg-white/60 backdrop-blur-sm">
+          <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-[#1c1c1e] flex flex-col justify-between select-none">
+            <div className="px-6 pt-7 pb-2 flex justify-between items-center text-xs font-semibold text-apple-gray-900/90 z-30 bg-[#1c1c1e]/90 backdrop-blur-sm">
               <span className="font-sans leading-none">{currentTime}</span>
               <div className="flex items-center gap-1.5">
                 <Wifi className="w-3.5 h-3.5" />
@@ -122,7 +122,7 @@ export default function DeviceSimulator() {
                   >
                     <div className="bg-[#faeffc] border border-[#ece0ef] rounded-2.5xl p-4 flex flex-col gap-3">
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white text-[10px] font-medium text-purple-600 border border-[#ece0ef]/60">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#2a2a2e] text-[10px] font-medium text-purple-600 border border-[#ece0ef]/60">
                           <Music className="w-3 h-3" /> Loopera
                         </span>
                         <span className="text-[10px] font-mono text-emerald-500">{onlineCount} онлайн</span>
@@ -138,7 +138,7 @@ export default function DeviceSimulator() {
                         </div>
                       </div>
 
-                      <div className="h-10 w-full flex items-end gap-1 px-1 bg-white/40 rounded-lg">
+                      <div className="h-10 w-full flex items-end gap-1 px-1 bg-[#2a2a2e]/40 rounded-lg">
                         {Array.from({ length: 22 }).map((_, index) => {
                           const heightFactor = isSimulating 
                             ? (index % 4 === 0 ? 90 : (index % 2 === 0 ? 30 : 15)) 
@@ -158,11 +158,11 @@ export default function DeviceSimulator() {
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 mt-1">
-                        <div className="bg-white/70 p-2.5 rounded-xl border border-apple-gray-100/50">
+                        <div className="bg-[#2a2a2e]/70 p-2.5 rounded-xl border border-apple-gray-100/50">
                           <span className="text-[9px] text-apple-gray-300 block">Лайков сегодня</span>
                           <span className="font-bold text-xs text-purple-600">+{likesToday}</span>
                         </div>
-                        <div className="bg-white/70 p-2.5 rounded-xl border border-apple-gray-100/50">
+                        <div className="bg-[#2a2a2e]/70 p-2.5 rounded-xl border border-apple-gray-100/50">
                           <span className="text-[9px] text-apple-gray-300 block">Продюсеров</span>
                           <span className="font-bold text-xs text-apple-gray-900">500+</span>
                         </div>
@@ -192,7 +192,7 @@ export default function DeviceSimulator() {
                   >
                     <div className="bg-[#f0f6fc] border border-[#d6e4f5] rounded-2.5xl p-4 flex flex-col gap-3">
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white text-[10px] font-medium text-apple-blue border border-[#d6e4f5]/60">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#2a2a2e] text-[10px] font-medium text-apple-blue border border-[#d6e4f5]/60">
                           <Presentation className="w-3 h-3" /> Decksy Agent
                         </span>
                         <span className="text-[10px] font-mono text-emerald-500 flex items-center gap-1">
@@ -221,7 +221,7 @@ export default function DeviceSimulator() {
                         />
                       </div>
 
-                      <div className="bg-white/80 rounded-xl p-3 border border-apple-gray-100">
+                      <div className="bg-[#2a2a2e]/80 rounded-xl p-3 border border-apple-gray-100">
                         <p className="text-[10px] text-apple-gray-300 uppercase font-mono tracking-wider mb-2">Зоны агента</p>
                         <div className="flex flex-col gap-1.5 text-xs text-apple-gray-900 font-mono">
                           <div className="flex justify-between">
@@ -253,7 +253,7 @@ export default function DeviceSimulator() {
                   >
                     <div className="bg-[#fff9f0] border border-[#ffead0] rounded-2.5xl p-4 flex flex-col gap-3">
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white text-[10px] font-medium text-[#c45100] border border-[#ffead0]/60">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#2a2a2e] text-[10px] font-medium text-[#c45100] border border-[#ffead0]/60">
                           <Mic className="w-3 h-3" /> Triphoy
                         </span>
                         <span className="text-[10px] font-mono text-apple-gray-300">Лейбл</span>
@@ -269,7 +269,7 @@ export default function DeviceSimulator() {
                         </div>
                       </div>
 
-                      <div className="bg-white/80 p-3 rounded-xl border border-apple-gray-100 flex flex-col gap-1.5">
+                      <div className="bg-[#2a2a2e]/80 p-3 rounded-xl border border-apple-gray-100 flex flex-col gap-1.5">
                         <div className="flex justify-between text-[11px] font-mono">
                           <span className="text-apple-gray-300">Продакшн:</span>
                           <span className="font-bold text-[#c45100]">rap-исполнители</span>
@@ -281,11 +281,11 @@ export default function DeviceSimulator() {
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div className="bg-white/80 p-2.5 rounded-xl border border-apple-gray-100 flex flex-col">
+                        <div className="bg-[#2a2a2e]/80 p-2.5 rounded-xl border border-apple-gray-100 flex flex-col">
                           <span className="text-[10px] text-apple-gray-300">Направление</span>
                           <span className="font-extrabold text-apple-gray-900 mt-1">hip-hop / trap</span>
                         </div>
-                        <div className="bg-white/80 p-2.5 rounded-xl border border-apple-gray-100 flex flex-col">
+                        <div className="bg-[#2a2a2e]/80 p-2.5 rounded-xl border border-apple-gray-100 flex flex-col">
                           <span className="text-[10px] text-apple-gray-300">Статус</span>
                           <span className="font-extrabold text-emerald-500 mt-1">активен</span>
                         </div>
@@ -298,19 +298,19 @@ export default function DeviceSimulator() {
               <div className="mt-auto mb-4 bg-apple-gray-50/80 backdrop-blur-md rounded-2.5xl p-2.5 flex justify-center gap-3 border border-apple-gray-100/60 z-30">
                 <button
                   onClick={() => setActiveApp('loopera')}
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${activeApp === 'loopera' ? 'bg-white shadow-md scale-105 border border-apple-gray-100' : 'hover:bg-white/50 bg-transparent'}`}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${activeApp === 'loopera' ? 'bg-[#2a2a2e] shadow-md scale-105 border border-apple-gray-100' : 'hover:bg-[#2a2a2e]/50 bg-transparent'}`}
                 >
                   <Music className="w-5 h-5 text-purple-500" />
                 </button>
                 <button
                   onClick={() => setActiveApp('decksy')}
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${activeApp === 'decksy' ? 'bg-white shadow-md scale-105 border border-apple-gray-100' : 'hover:bg-white/50 bg-transparent'}`}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${activeApp === 'decksy' ? 'bg-[#2a2a2e] shadow-md scale-105 border border-apple-gray-100' : 'hover:bg-[#2a2a2e]/50 bg-transparent'}`}
                 >
                   <Presentation className="w-5 h-5 text-apple-blue" />
                 </button>
                 <button
                   onClick={() => setActiveApp('triphoy')}
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${activeApp === 'triphoy' ? 'bg-white shadow-md scale-105 border border-apple-gray-100' : 'hover:bg-white/50 bg-transparent'}`}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${activeApp === 'triphoy' ? 'bg-[#2a2a2e] shadow-md scale-105 border border-apple-gray-100' : 'hover:bg-[#2a2a2e]/50 bg-transparent'}`}
                 >
                   <Mic className="w-5 h-5 text-apple-orange" />
                 </button>
@@ -335,7 +335,7 @@ export default function DeviceSimulator() {
           <div className="flex flex-col gap-4">
             <button 
               onClick={() => setActiveApp('loopera')}
-              className={`text-left p-3.5 rounded-2xl border transition-all ${activeApp === 'loopera' ? 'bg-white shadow-md border-purple-400 font-semibold text-apple-gray-900' : 'bg-transparent border-apple-gray-100 hover:bg-white/40'}`}
+              className={`text-left p-3.5 rounded-2xl border transition-all ${activeApp === 'loopera' ? 'bg-mv-card shadow-md border-purple-400 font-semibold text-apple-gray-900' : 'bg-transparent border-mv-border hover:bg-mv-card-muted'}`}
             >
               <div className="flex items-center gap-2.5">
                 <Music className="w-4 h-4 text-purple-500" />
@@ -345,7 +345,7 @@ export default function DeviceSimulator() {
 
             <button 
               onClick={() => setActiveApp('decksy')}
-              className={`text-left p-3.5 rounded-2xl border transition-all ${activeApp === 'decksy' ? 'bg-white shadow-md border-apple-blue font-semibold text-apple-gray-900' : 'bg-transparent border-apple-gray-100 hover:bg-white/40'}`}
+              className={`text-left p-3.5 rounded-2xl border transition-all ${activeApp === 'decksy' ? 'bg-mv-card shadow-md border-apple-blue font-semibold text-apple-gray-900' : 'bg-transparent border-mv-border hover:bg-mv-card-muted'}`}
             >
               <div className="flex items-center gap-2.5">
                 <Presentation className="w-4 h-4 text-apple-blue" />
@@ -355,7 +355,7 @@ export default function DeviceSimulator() {
 
             <button 
               onClick={() => setActiveApp('triphoy')}
-              className={`text-left p-3.5 rounded-2xl border transition-all ${activeApp === 'triphoy' ? 'bg-white shadow-md border-apple-orange font-semibold text-apple-gray-900' : 'bg-transparent border-apple-gray-100 hover:bg-white/40'}`}
+              className={`text-left p-3.5 rounded-2xl border transition-all ${activeApp === 'triphoy' ? 'bg-mv-card shadow-md border-apple-orange font-semibold text-apple-gray-900' : 'bg-transparent border-mv-border hover:bg-mv-card-muted'}`}
             >
               <div className="flex items-center gap-2.5">
                 <Mic className="w-4 h-4 text-apple-orange" />

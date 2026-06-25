@@ -1,87 +1,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
+:root,
+.theme-dark {
+  --mv-page: #0a0a0b;
+  --mv-card: #141416;
+  --mv-card-muted: #1c1c1e;
+  --mv-border: #2a2a2e;
+  --mv-text: #f5f5f7;
+  --mv-btn: #f5f5f7;
+  --mv-btn-text: #0a0a0b;
+  --mv-gray-50: #141416;
+  --mv-gray-100: #1c1c1e;
+  --mv-gray-200: #2a2a2e;
+  --mv-gray-300: #86868b;
+  --mv-gray-400: #a1a1a6;
+  --mv-gray-900: #f5f5f7;
+  --mv-gray-950: #f5f5f7;
+}
+
+.theme-light {
+  --mv-page: #ffffff;
+  --mv-card: #ffffff;
+  --mv-card-muted: #f5f5f7;
+  --mv-border: #e8e8ed;
+  --mv-text: #1d1d1f;
+  --mv-btn: #1d1d1f;
+  --mv-btn-text: #ffffff;
+  --mv-gray-50: #f5f5f7;
+  --mv-gray-100: #e8e8ed;
+  --mv-gray-200: #d2d2d7;
+  --mv-gray-300: #86868b;
+  --mv-gray-400: #515154;
+  --mv-gray-900: #1d1d1f;
+  --mv-gray-950: #1d1d1f;
+}
+
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  
-  --color-apple-gray-50: #f5f5f7;
-  --color-apple-gray-100: #e8e8ed;
-  --color-apple-gray-200: #d2d2d7;
-  --color-apple-gray-300: #86868b;
-  --color-apple-gray-400: #515154;
-  --color-apple-gray-900: #1d1d1f;
-  
+
+  --color-mv-page: var(--mv-page);
+  --color-mv-card: var(--mv-card);
+  --color-mv-card-muted: var(--mv-card-muted);
+  --color-mv-border: var(--mv-border);
+  --color-mv-text: var(--mv-text);
+  --color-mv-btn: var(--mv-btn);
+  --color-mv-btn-text: var(--mv-btn-text);
+
+  --color-apple-gray-50: var(--mv-gray-50);
+  --color-apple-gray-100: var(--mv-gray-100);
+  --color-apple-gray-200: var(--mv-gray-200);
+  --color-apple-gray-300: var(--mv-gray-300);
+  --color-apple-gray-400: var(--mv-gray-400);
+  --color-apple-gray-900: var(--mv-gray-900);
+  --color-apple-gray-950: var(--mv-gray-950);
+
   --color-apple-blue: #0071e3;
   --color-apple-blue-hover: #0077ed;
   --color-apple-orange: #ff9f0a;
   --color-apple-green: #30d158;
-  
+
   --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-scale-up: scale-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-slide-right: slide-right 0.5s ease-out forwards;
 }
 
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-up {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slide-right {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
-  }
+  from { width: 0%; }
+  to { width: 100%; }
 }
 
 @layer base {
+  html { scroll-behavior: smooth; }
+
   body {
     font-family: var(--font-sans);
-    background-color: #ffffff;
-    color: #1d1d1f;
+    background-color: var(--mv-page);
+    color: var(--mv-text);
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.011em;
     overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
-  
-  /* Smooth scrolling for anchor links */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Custom scrollbar matching Apple's minimal look */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: #d2d2d7;
+    background: var(--mv-gray-200);
     border-radius: 9999px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #86868b;
   }
 }
 
+@layer utilities {
+  .mv-btn-primary {
+    background-color: var(--mv-btn);
+    color: var(--mv-btn-text);
+  }
+  .mv-btn-primary:hover { opacity: 0.88; }
+}

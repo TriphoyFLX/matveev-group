@@ -51,7 +51,7 @@ export default function VentureCalculator() {
   };
 
   return (
-    <div id="venture-calculator-container" className="w-full max-w-4xl mx-auto bg-white border border-apple-gray-100 rounded-3xl p-6 md:p-8 shadow-xl">
+    <div id="venture-calculator-container" className="w-full max-w-4xl mx-auto bg-mv-card border border-apple-gray-100 rounded-3xl p-6 md:p-8 shadow-xl">
       <div className="flex items-center gap-2 mb-6">
         <div className="w-8 h-8 rounded-lg bg-apple-gray-50 border border-apple-gray-100 flex items-center justify-center">
           <Calculator className="w-4 h-4 text-apple-blue" />
@@ -174,7 +174,7 @@ export default function VentureCalculator() {
               </div>
             </div>
 
-            <div className="bg-white border border-apple-gray-100 rounded-xl p-3.5 space-y-2">
+            <div className="bg-mv-card border border-apple-gray-100 rounded-xl p-3.5 space-y-2">
               <span className="text-[9px] font-bold text-apple-orange font-mono uppercase">Эффект группы</span>
               <div className="flex items-start gap-2 text-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
@@ -202,7 +202,7 @@ export default function VentureCalculator() {
             </div>
             <a 
               href="#incorporation-portal"
-              className="text-center py-2 px-4 rounded-lg bg-apple-gray-950 text-white text-[11px] font-semibold hover:bg-neutral-800 transition-colors flex items-center justify-center gap-1"
+              className="text-center py-2 px-4 rounded-lg mv-btn-primary text-[11px] font-semibold hover:opacity-90 transition-colors flex items-center justify-center gap-1"
             >
               Предложить сотрудничество <ArrowRight className="w-3.5 h-3.5" />
             </a>
